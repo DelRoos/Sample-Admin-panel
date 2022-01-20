@@ -1,7 +1,10 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sample_dashboard_panel/constants.dart';
+import 'package:sample_dashboard_panel/screens/dashboard/components/chart.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/header.dart';
+import 'package:sample_dashboard_panel/screens/dashboard/components/storage_info_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -14,6 +17,89 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           children: [
             Header(),
+            SizedBox(height: defaultPadding),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("My Files",
+                              style: Theme.of(context).textTheme.subtitle1),
+                          ElevatedButton.icon(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: defaultPadding * 1.5,
+                                  vertical: defaultPadding),
+                            ),
+                            onPressed: () {},
+                            icon: Icon(Icons.add),
+                            label: Text("Add New"),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: EdgeInsets.all(defaultPadding),
+                    // height: 500,
+                    // color: secondaryColor,
+                    decoration: BoxDecoration(
+                      color: secondaryColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Storage Details",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: defaultPadding),
+                        Chart(),
+                        StorageInfoCard(
+                          amountOfFiles: '1.3GB',
+                          title: 'Documents Files',
+                          svgSrc: 'icons/Documents.svg',
+                          numOfFiles: 1328,
+                        ),
+                        StorageInfoCard(
+                          amountOfFiles: '15.2GB',
+                          title: 'Medias Files',
+                          svgSrc: 'icons/media.svg',
+                          numOfFiles: 128,
+                        ),
+                        StorageInfoCard(
+                          amountOfFiles: '15.2GB',
+                          title: 'Others Files',
+                          svgSrc: 'icons/folder.svg',
+                          numOfFiles: 1328,
+                        ),
+                        StorageInfoCard(
+                          amountOfFiles: '15.2GB',
+                          title: 'Unknow Files',
+                          svgSrc: 'icons/unknown.svg',
+                          numOfFiles: 1328,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
