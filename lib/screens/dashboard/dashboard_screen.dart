@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sample_dashboard_panel/constants.dart';
 import 'package:sample_dashboard_panel/models/recent_file.dart';
+import 'package:sample_dashboard_panel/responsive.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/chart.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/header.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/my_files.dart';
@@ -33,66 +34,80 @@ class DashboardScreen extends StatelessWidget {
                         height: defaultPadding,
                       ),
                       RecentFileContainer(),
+                      if (Responsive.isMobile(context)) SizedBox(height: 10),
+                      if (Responsive.isMobile(context)) StorageDetailsCard(),
                     ],
                   ),
                 ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: EdgeInsets.all(defaultPadding),
-                    // height: 500,
-                    // color: secondaryColor,
-                    decoration: BoxDecoration(
-                      color: secondaryColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Storage Details",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: defaultPadding),
-                        Chart(),
-                        StorageInfoCard(
-                          amountOfFiles: '1.3GB',
-                          title: 'Documents Files',
-                          svgSrc: 'icons/Documents.svg',
-                          numOfFiles: 1328,
-                        ),
-                        StorageInfoCard(
-                          amountOfFiles: '15.2GB',
-                          title: 'Medias Files',
-                          svgSrc: 'icons/media.svg',
-                          numOfFiles: 128,
-                        ),
-                        StorageInfoCard(
-                          amountOfFiles: '15.2GB',
-                          title: 'Others Files',
-                          svgSrc: 'icons/folder.svg',
-                          numOfFiles: 1328,
-                        ),
-                        StorageInfoCard(
-                          amountOfFiles: '15.2GB',
-                          title: 'Unknow Files',
-                          svgSrc: 'icons/unknown.svg',
-                          numOfFiles: 1328,
-                        ),
-                      ],
-                    ),
+                if (!Responsive.isMobile(context)) SizedBox(width: 10),
+                if (!Responsive.isMobile(context))
+                  Expanded(
+                    flex: 2,
+                    child: StorageDetailsCard(),
                   ),
-                ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class StorageDetailsCard extends StatelessWidget {
+  const StorageDetailsCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(defaultPadding),
+      // height: 500,
+      // color: secondaryColor,
+      decoration: BoxDecoration(
+        color: secondaryColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Storage Details",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: defaultPadding),
+          Chart(),
+          StorageInfoCard(
+            amountOfFiles: '1.3GB',
+            title: 'Documents Files',
+            svgSrc: 'icons/Documents.svg',
+            numOfFiles: 1328,
+          ),
+          StorageInfoCard(
+            amountOfFiles: '15.2GB',
+            title: 'Medias Files',
+            svgSrc: 'icons/media.svg',
+            numOfFiles: 128,
+          ),
+          StorageInfoCard(
+            amountOfFiles: '15.2GB',
+            title: 'Others Files',
+            svgSrc: 'icons/folder.svg',
+            numOfFiles: 1328,
+          ),
+          StorageInfoCard(
+            amountOfFiles: '15.2GB',
+            title: 'Unknow Files',
+            svgSrc: 'icons/unknown.svg',
+            numOfFiles: 1328,
+          ),
+        ],
       ),
     );
   }
