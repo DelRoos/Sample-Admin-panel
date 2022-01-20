@@ -2,9 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sample_dashboard_panel/constants.dart';
+import 'package:sample_dashboard_panel/models/recent_file.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/chart.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/header.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/my_files.dart';
+import 'package:sample_dashboard_panel/screens/dashboard/components/recent_file_container.dart';
 import 'package:sample_dashboard_panel/screens/dashboard/components/storage_info_card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -24,7 +26,15 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 5,
-                  child: MyFiles(),
+                  child: Column(
+                    children: [
+                      MyFiles(),
+                      SizedBox(
+                        height: defaultPadding,
+                      ),
+                      RecentFileContainer(),
+                    ],
+                  ),
                 ),
                 SizedBox(width: 10),
                 Expanded(
